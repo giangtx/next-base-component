@@ -1,0 +1,1 @@
+export const isServerRequest = request => !request.url.startsWith('/_next');

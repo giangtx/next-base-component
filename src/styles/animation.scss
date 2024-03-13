@@ -1,0 +1,309 @@
+/* Utility classes */
+.animate {
+    animation-duration: 0.5s;
+    animation-fill-mode: both;
+    animation-play-state: paused;
+}
+.animated {
+    animation-play-state: running;
+}
+  
+.animate.animate--infinite {
+    animation-iteration-count: infinite;
+}
+  
+.animate.animate--delay-1s {
+    animation-delay: 1s;
+}
+  
+.animate.animate--fast {
+    animation-duration: 0.6s;
+}
+  
+.animate.animate--slow {
+    animation-duration: 3s;
+}
+  
+  /* Animations */
+@keyframes slideInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    80% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.slideInUp {
+    animation-name: slideInUp;
+    animation-timing-function: ease-in;
+}
+
+// Transition
+.animate.animation-header {
+    transition: all 0.5s ease;
+    opacity: 0;
+    transform: translateY(-30px);
+}
+
+.animated.animation-header {
+    opacity: 1;
+    transform: translateY(0);
+}
+.bg-scale-img {
+    transform-origin: top;
+    animation: bg-animation linear forwards;
+    animation-timeline: view();
+    animation-range: exit;
+}
+@keyframes bg-animation {
+    25% {
+        opacity: 1;
+    }
+    80% {
+        scale: 1.2;
+        opacity: 0;
+    }
+    100% {
+        opacity: 0;
+        scale: 1.2;
+    }
+}
+.animate-scroll-down {
+    transform-origin: top;
+    transform: translateY(70px) scale(.95);
+    animation: scroll-down linear forwards;
+    animation-timeline: view();
+    animation-range: exit;
+}
+.animate-scroll-up {
+    transform-origin: top;
+    animation: scroll-up linear forwards;
+    animation-timeline: view();
+    animation-range: exit;
+}
+.animate-scroll-left {
+    transform-origin: top;
+    animation: scroll-left linear forwards;
+    animation-timeline: view();
+    animation-range: exit;
+}
+.animate-scroll-right {
+    transform-origin: top;
+    animation: scroll-right linear forwards;
+    animation-timeline: view();
+    animation-range: exit;
+}
+
+@media (prefers-reduced-motion) {
+    .bg-scale-img {
+        animation: none;
+    }
+    .animate-scroll-down {
+        transform: translateY(0) scale(1);
+    }
+    .animate-scroll-up {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes scroll-down {
+    from {
+        transform: translateY(70px) scale(.95);
+    }
+    to {
+        transform: translateY(0) scale(1);
+    }
+}
+@keyframes scroll-up {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(70px);
+    }
+}
+
+@keyframes scroll-left {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(-70px);
+        opacity: 0;
+    }
+}
+@keyframes scroll-right {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+        transform: translateX(70px);
+    }
+}
+
+@keyframes move {
+	to {
+		/* Move horizontally so that right edge is aligned against the viewport */
+		transform: translateX(calc(-100% + 100vw));
+	}
+}
+
+.sectionPin {
+	/* Stretch it out, so that we create room for the horizontal scroll animation */
+	height: 500vh;
+	overflow: visible; /* To make position sticky work … */
+
+	view-timeline-name: --section-pin-tl;
+	view-timeline-axis: block;
+}
+
+.pin-wrap-sticky {
+	/* Stick to Top */
+	height: 100vh;
+	width: 100vw;
+	position: sticky;
+	top: 0;
+
+	width: 100vw;
+	overflow-x: hidden;
+}
+
+.pin-wrap {
+    display: flex;
+    align-items: center;
+	height: 100vh;
+	width: 250vmax;
+    padding: 50px;
+	/* Hook animation */
+	will-change: transform;
+	animation: linear move forwards;
+    gap: 20px;
+	/* Link animation to view-timeline */
+	animation-timeline: --section-pin-tl;
+	animation-range: contain 0% contain 100%;
+}
+@media (prefers-reduced-motion) {
+    .pin-wrap {
+        height: 60vh;
+        animation: none;
+    }
+    .sectionPin {
+        height: 60vh;
+    }
+    .pin-wrap-sticky {
+        height: 60vh;
+    }
+}
+@media screen and (max-width: 768px){
+    .pin-wrap {
+        padding: 15px;
+    }
+}
+.pin-wrap-first-item {
+    min-width: 60vw;
+    max-width: 60vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: self-start;
+}
+.pin-wrap-item {
+    height: 100%;
+}
+.pin-wrap-item img{
+    height: 100%;
+    width: auto;
+    max-width: unset;
+}
+
+// scrolling content
+.scroller__inner {
+    padding-block: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.scroller[data-animated="true"] {
+    overflow: hidden;
+}
+
+.scroller[data-animated="true"] .scroller__inner {
+    width: max-content;
+    flex-wrap: nowrap;
+    animation: scroll var(--_animation-duration, 40s)
+        var(--_animation-direction, forwards) linear infinite;
+}
+
+.scroller[data-direction="right"] {
+    --_animation-direction: reverse;
+}
+
+.scroller[data-direction="left"] {
+    --_animation-direction: forwards;
+}
+
+.scroller[data-speed="fast"] {
+    --_animation-duration: 20s;
+}
+
+.scroller[data-speed="normal"] {
+    --_animation-duration: 40s;
+}
+
+.scroller[data-speed="slow"] {
+    --_animation-duration: 60s;
+}
+
+@keyframes scroll {
+    to {
+        transform: translate(calc(-50%));
+    }
+}
+
+// draggable
+.drag-item {
+    transition: none;
+}
+.dark {
+    .dragging {
+        background-color: #000;
+        border: 1px solid #fff;
+    }
+}
+.dragging {
+    cursor: pointer;
+    position: fixed;
+    z-index: 1000;
+    background-color: #fff;
+    border: 1px solid #000;
+    // padding: 20px;
+    transform: scale(1.03);
+    transition: transform 0.3s ease;
+    .drag-item-content {
+        height: 100%;
+        align-items: center;
+        padding: 12px;
+    }
+    opacity: 1;
+}
+.dragable-item {
+    transition: none;
+}
+.drag-over {
+    transition: transform 0.3s ease;
+}
+.wrp-dragging {
+    padding: 0;
+    border: none;
+}

@@ -1,0 +1,496 @@
+// css for slider
+.slider-wrp {
+    .slider-content {
+        overflow-y: hidden;
+        overflow-x: auto;
+    }
+    .slider-content::-webkit-scrollbar {
+        display: none;
+    }
+    //overflow: hidden;
+    width: 100%;
+    position: relative;
+    .slider-items {
+        gap: var(--slide-gap);
+    }
+    @media screen and (max-width: 768px) {
+        .slider-items {
+            gap: var(--slide-gap-mobile);
+        }
+        .slider-control {
+            display: none;
+        }
+    }
+    .slider-control {
+        width: 100%;
+        //opacity: 0;
+        .prev-button {
+            position: absolute;
+            //top: 50%;
+            left: 0;
+            z-index: 1000;
+            transform: translateY(-50%);
+            transition: opacity var(--transition-duration) cubic-bezier(0.645, 0.045, 0.355, 1) 0s;  
+        }
+        .next-button {
+            z-index: 1000;
+            transform: translateY(-50%);
+            position: absolute;
+            //left: auto;
+            right: 0;
+            transition: opacity var(--transition-duration) cubic-bezier(0.645, 0.045, 0.355, 1) 0s;
+        }
+        .btn-disable {
+            opacity: 0.5;
+        }
+        
+    }
+    @media (max-width: 768px) {
+        .slider-control {
+            opacity: 1;
+        }
+    }
+    
+}
+.slider-wrp:hover {
+    .slider-control {
+        opacity: 1;
+    }
+}
+
+.slider-items {
+    display: flex;
+    overflow: hidden;
+}
+.slider-item {
+    width: 100%;
+    transition: all var(--transition-duration) cubic-bezier(0.645, 0.045, 0.355, 1) 0s;
+}
+.slider-process {
+    background-color: #a5a5a5;
+    margin-top: 20px;
+    width: 100%;
+    border-radius: 2px;
+}
+.process-wrp {
+    width: 0%;
+    height: 3px;
+}
+
+// css for modal
+
+.modal-backdrop {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 100000;
+}
+
+.modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s ease;
+    overflow: hidden;
+}
+.modal-dialog {
+    transition: transform 0.3s ease;
+}
+.modal[data-position="center"] {
+    transform: translateY(-20px) scale(0.9);
+}
+.modal[data-position="center"].modal-open {
+    transform: translateY(0) scale(1);
+}
+.modal[data-position="left"] {
+    .modal-backdrop {
+        justify-content: flex-start;
+        align-items: start;
+        .modal-dialog {
+            justify-content: flex-start;
+            height: 100vh;
+            transform: translateX(-100px);
+        }
+    }
+}
+.modal[data-position="left"].modal-open {
+    .modal-dialog {
+        transform: translateX(0);
+    }
+}
+.modal[data-position="right"] {
+    .modal-backdrop {
+        justify-content: flex-end;
+        align-items: start;
+        .modal-dialog {
+            justify-content: flex-start;
+            height: 100vh;
+            transform: translateX(100px);
+        }
+    }
+}
+.modal[data-position="right"].modal-open {
+    .modal-dialog {
+        transform: translateX(0);
+    }
+}
+.modal[data-position="top"] {
+    .modal-backdrop {
+        justify-content: flex-start;
+        align-items: start;
+        .modal-dialog {
+            width: 100vw;
+            transform: translateY(-100px);
+        }
+    }
+}
+.modal[data-position="top"].modal-open {
+    .modal-dialog {
+        transform: translateY(0);
+    }
+}
+.modal[data-position="bottom"] {
+    .modal-backdrop {
+        justify-content: flex-start;
+        align-items: end;
+        .modal-dialog {
+            transform: translateY(100px);
+            width: 100vw;
+        }
+    }
+}
+.modal[data-position="bottom"].modal-open {
+    .modal-dialog {
+        transform: translateY(0);
+    }
+    // transform: translateY(0);
+}
+@media screen and (max-width: 768px) {
+    .modal[data-mobile-position="center"] {
+        transform: translateY(-20px) scale(0.9);
+        .modal-backdrop {
+            justify-content: center;
+            align-items: center;
+        }
+    }
+    .modal[data-mobile-position="center"].modal-open {
+        transform: translateY(0) scale(1);
+    }
+    .modal[data-mobile-position="left"] {
+        .modal-backdrop {
+            justify-content: flex-start;
+            align-items: start;
+            .modal-dialog {
+                width: 80vw;
+                justify-content: flex-start;
+                height: 100vh;
+                transform: translateX(-100px);
+            }
+        }
+    }
+    .modal[data-mobile-position="left"].modal-open {
+        .modal-dialog {
+            transform: translateX(0);
+        }
+    }
+    .modal[data-mobile-position="right"] {
+        .modal-backdrop {
+            justify-content: flex-end;
+            align-items: start;
+            .modal-dialog {
+                width: 80vw;
+                justify-content: flex-start;
+                height: 100vh;
+                transform: translateX(100px);
+            }
+        }
+    }
+    .modal[data-mobile-position="right"].modal-open {
+        .modal-dialog {
+            transform: translateX(0);
+        }
+    }
+    .modal[data-mobile-position="top"] {
+        .modal-backdrop {
+            justify-content: flex-start;
+            align-items: start;
+            .modal-dialog {
+                width: 100vw;
+                transform: translateY(-100px);
+            }
+        }
+       
+    }
+    .modal[data-mobile-position="top"].modal-open {
+        .modal-dialog {
+            transform: translateY(0);
+        }
+        
+    }
+    .modal[data-mobile-position="bottom"] {
+        .modal-backdrop {
+            justify-content: flex-start;
+            align-items: end;
+            .modal-dialog {
+                width: 100vw;
+                transform: translateY(100px);
+            }
+        }
+    }
+    .modal[data-mobile-position="bottom"].modal-open {
+        .modal-dialog {
+            transform: translateY(0);
+        }
+    }
+}
+
+.modal-open {
+    z-index: 10000;
+    opacity: 1;
+    visibility: visible;
+    transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
+}
+
+.modal-dialog {
+    background: white;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    max-height: 90%;
+}
+@media screen and (max-width: 768px) {
+    .modal-dialog {
+        width: 80vw;
+    }
+}
+.modal-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid #ccc;
+    .modal-title {
+        font-size: 20px;
+        font-weight: 600;
+    }
+    .modal-close {
+        cursor: pointer;
+        font-size: 20px;
+        font-weight: 600;
+    }
+}
+.modal-body {
+    width: 100%;
+    padding: 20px;
+    height: 100%;
+    overflow: auto;
+}
+.modal-invisible-background {
+    background: transparent !important;
+}
+.loader {
+    width: 48px;
+    height: 48px;
+    border: 5px solid #FFF;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+}
+
+.modal-loading {
+    height: 100vh;
+}
+.subcate, .category {
+    width: 500px;
+    height: 100%;
+    padding: 30px 30px;
+    position: absolute;
+    right: 0;
+}
+.post{
+    height: 100%;
+    width: calc(100% - 16.666667%);
+    position: absolute;
+    right: 0;
+    padding: 30px;
+}
+
+.deletepopup{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 30px;
+    margin:auto;
+    width: 500px;
+    background: #fff !important;
+}
+@keyframes rotation {
+0% {
+    transform: rotate(0deg);
+}
+100% {
+    transform: rotate(360deg);
+}
+} 
+.text-editor-wrp {
+    margin-top: 40px
+}
+.demo-wrapper {
+    border: 1px solid #ccc;
+}
+.text-editor-html-test {
+    margin-top: 40px;
+    width: 100%;
+    border: 1px solid #ccc;
+    height: 400px;
+}
+.text-editor-result-test {
+    margin-top: 40px;
+
+    img {
+        display: unset;
+    }
+}
+@keyframes slide-in {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+@keyframes slide-out {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(100%);
+    }
+}
+.toast-info {
+    background: #494e5c;
+    color: #dff0d8;
+}
+.toast-success {
+    background: #16a34a;
+    color: #dff0d8;
+}
+.toast-error {
+    background: #a94442;
+    color: #dff0d8;
+}
+.toast-warning {
+    background: #8a6d3b;
+    color: #dff0d8;
+}
+.toasts {
+    position: fixed;
+    width: 100%;
+}
+.toast {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    transform: translateY(var(--toast-translate));
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.toast-show {
+    transform: translateY(var(--toast-translate-active));
+    opacity: 1;
+}
+
+// scrolling text
+.scrolling-text {
+    max-width: 100%;
+    overflow: hidden;
+    grid: auto / auto-flow max-content;
+    display: grid;
+  }
+  
+  .scrolling-text-content {
+    white-space: nowrap;
+    overflow: hidden;
+    display: inline-block;
+    animation: marquee 15s linear infinite;
+  }
+
+  
+@keyframes marquee {
+    0% {
+        transform: translate(0, 0);
+    }
+    100% {
+        transform: translate(-100%, 0);
+    }
+}
+
+.picker-item {
+    aspect-ratio: 1/1;
+    cursor: pointer;
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+.skeleton-item {
+    background: rgb(51 65 85);
+    opacity: 0.3;
+    aspect-ratio: 1/1;
+    height: fit-content;
+}
+.lib-wpr {
+    position: fixed;
+    bottom: 50px;
+    right: 10px;
+    border-radius: 50%;
+    overflow: hidden;
+    height: 50px;
+    width: 50px;
+    background: black;
+    color: white;
+    button {
+        width: 100%;
+        height: 100%;
+        padding: 10px;
+        svg {
+            width: 100%;
+            height: 100%;
+        }
+    }
+}
+.picker-selected {
+    border: 2px solid #007bff;
+}
+.loading-blur {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    background: rgba(0, 0, 0, 0.5);
+}

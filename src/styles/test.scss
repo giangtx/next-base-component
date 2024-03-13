@@ -1,0 +1,16 @@
+.test-contact {
+    .test-font-large {
+        font-size: 5vw;
+    }
+    .test-font-small {
+        font-size: 1vw;
+    }
+    @media (max-width: 768px) {
+        .test-font-large {
+            font-size: 7vw;
+        }
+        .test-font-small {
+            font-size: 2vw;
+        }
+    }
+}
